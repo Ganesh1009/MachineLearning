@@ -37,7 +37,7 @@ using both EKF1 and EKF2.
 ![Tabulated Result](https://github.com/Ganesh1009/MachineLearning/blob/master/Extended%20Kalman%20Filter%20Based%20Orientation%20Estimation/images/ExperimentResult.PNG)
 Figure.4 shows the output of the orientaion estimation.(Output with respect to each filter is not shown as the drift is observed over period of time for EKF1).
 
-![Rendered Result](https://github.com/Ganesh1009/MachineLearning/blob/master/Extended%20Kalman%20Filter%20Based%20Orientation%20Estimation/images/ExperimentResult.PNG)
+![Rendered Result](https://github.com/Ganesh1009/MachineLearning/blob/master/Extended%20Kalman%20Filter%20Based%20Orientation%20Estimation/images/UIRender.PNG)
 
 Figure.5 shows the sample output of EKF1 and EKF2 and the time take to perform the calibration and orientation estimation.
 
