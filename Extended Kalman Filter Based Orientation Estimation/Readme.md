@@ -9,16 +9,18 @@ Extended Kalman Filter based Filtering, IMU sensors, Nordic Microcontroller, Ori
 Motion tracking is a critical technology in Robotics, Human-Computer Interaction, Simulated environments that require information about human motion in real-time. Thus accurate tracking of the orientation of these IMU sensors in the 3D space is vital. Precise estimates of the 3D orientation by IMU sensing unit requires exploitation of complementary properties of gyros, accelerometers and magnetic sensors. Fusing the properties of these sensors like the aiding sensors (accelerometer and magnetometer sensor) help in mitigating the gyro bias error while in turn the gyro data can be used to smooth out the errors in aiding sensors. Different approaches are available to design sensor fusionalgorithms[2]. Since orientation estimation is an inherently non-linear problem, Extended Kalman Filter is perhaps an elegant tool for combining multisensory fusion, the motion prediction and filtering. It provides a model for predicting the aspects of time behaviour of the system (dynamic model) and model for sensors measurement (measurement model)[3]. Orientation is improved by making use of quaternions which boosts computational efficienty and avoid singularities. Additionally, the use of quaternions eliminates the need for computing trigonometric functions. This report shows
 that the preprocessing of the raw information obtained from the IMU and then applying the filter to estimate the quaternion orientation is feasible on Nordic Microcontroller and also experimental results validating that filter performance on the microcontroller is adequate for orientation estimation based application. Usage of the microcontroller is well suited in body sensor network based application as they are small in size and consume less power with reliable output and performance. 
 
-Fig. 1 shows the block diagram of the approach used to estimate the orientation of the IMU unit interfaced with Nordic Microcontroller. 
+Fig.1 shows the block diagram of the approach used to estimate the orientation of the IMU unit interfaced with Nordic Microcontroller. 
 ![Approach](https://github.com/Ganesh1009/MachineLearning/blob/master/Extended%20Kalman%20Filter%20Based%20Orientation%20Estimation/images/Approach.PNG)
 
 ## My approach
-Currently at DFKI there exists Centralized architecture with Edison(fig.2a) and Decentralized ar-
-chitecture with Nordic(fig.2b).
+Currently at DFKI there exists Centralized architecture with Edison(fig.2a) and Decentralized architecture with Nordic(fig.2b).
+
 ![Architecture Style](https://github.com/Ganesh1009/MachineLearning/blob/master/Extended%20Kalman%20Filter%20Based%20Orientation%20Estimation/images/Architecture.PNG)
-In the centralized architecture(fig.2a), the IMU units send the raw measurements to the Edison
-microcontroller(fig.3a).
+
+In the centralized architecture(fig.2a), the IMU units send the raw measurements to the Edison microcontroller(fig.3a).
+
 ![Hardware Used](https://github.com/Ganesh1009/MachineLearning/blob/master/Extended%20Kalman%20Filter%20Based%20Orientation%20Estimation/images/Handware.PNG)
+
 Then the calibration and the Orientation estimation process is performed on it. The Intel Edison run on the Linux(Yocto) platform and the application (DFKI BSN Framework) is developed using C++. As per the design of the decentralized architecture, each node in the kinematic chain is a smart node. The IMU units are interfaced with the Nordic(nRF52832)(fig.3b) and calibration of the raw information and its orientation estimation using EKF is computed on every node in the chain. The estimated quaternion is then transferred to the Nordic(nRF52840)(fig:3c) BLE-USB dongle which communicates with the PC to render the graphical representation of the complete kinematic chain. There exist many challenges while implementing the complete filter which is listed below:
 1. Can only be implemented in C.
 2. No memory management unit.
@@ -38,6 +40,7 @@ Figure.4 shows the output of the orientaion estimation.(Output with respect to e
 ![Rendered Result](https://github.com/Ganesh1009/MachineLearning/blob/master/Extended%20Kalman%20Filter%20Based%20Orientation%20Estimation/images/ExperimentResult.PNG)
 
 Figure.5 shows the sample output of EKF1 and EKF2 and the time take to perform the calibration and orientation estimation.
+
 ![CMD LIVE Output](https://github.com/Ganesh1009/MachineLearning/blob/master/Extended%20Kalman%20Filter%20Based%20Orientation%20Estimation/images/CMDOutput.PNG)
 
 ### Conclusion
@@ -47,7 +50,7 @@ with highly motivated individuals at DFKI has, in turn, motivated me to continue
 thesis on Body Sensor Network so as to understand the algorithm in its entirety and build a novel
 approach.
 
-### Referemnces 
+### References 
 1. Franco Ferraris, Ugo Grimaldi, and Marco Parvis. Procedure for effortless in-field calibration of three-axis
 rate gyros and accelerometers. Sensors and Materials, 7:311{311, 1995.
 2. Angelo Maria Sabatini. Estimating three-dimensional orientation of human body parts by inertial/mag-
